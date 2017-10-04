@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fojp>
+	<!-- 0:日本語化できるテキストのみ自前描画 / 1:日本語化できなかったテキストも自前描画 -->
+	<config id="AllTextReplace" value="1" />
+
+	<!-- 1:FalloutNewVegasでのガクガク現象を回避 / 0:何もしない ※NewVegas用の設定※ -->
+	<config id="ForceDirect3D9" value="1" />
+	
+	<!-- 1:テクスチャサイズを最適化する / 0:しない -->
+	<!-- ※1を推奨。ただし環境によっては正常動作しない可能性があります。その場合は0にしてください。 -->
+	<config id="UseOptimizedTextureSize" value="1" />
+	
+	<!-- 翻訳ON/OFF切り替えキー DIKの16進数 / 0:無効 -->
+	<config id="EnableTranslationKey" value="57" /><!-- F11 -->
+
+	<!-- 翻訳ログ出力キー DIKの16進数 / 0:無効 -->
+	<config id="TranslationLoggingKey" value="58" /><!-- F12 -->
+
+    <!-- コンソール表示キー DIKの16進数 / 0:無効 -->
+    <config id="ConsoleKey" value="3E" /><!-- F4 -->
+
+	<!-- テキスト行あわせ フォントサイズ・UIに合わせて変更が必要 -->
+	<config id="LineAdjuster" value="0" />
+
+	<!-- 1 : FPS管理機能ON / 0 : FPS管理機能OFF -->
+	<config id="FPSManagement" value="0" />
+	
+	<!-- FPS管理機能ON/OFF切り替えキー DIKの16進数 / 0:無効 -->
+	<config id="FPSManagementKey" value="44" /><!-- F10 -->
+	
+	<!-- FPS管理機能ONの場合の最大FPS -->
+	<config id="FPSMaximum" value="60" />
+
+	<xinput>
+		<!-- bindkey : XInputパッドのボタンにキーボードのキーを割り当て（FOSE/NVSEを使用するMOD用） / 複数可 / スティック・トリガー非対応 -->
+		<!-- @button : 割り当てたいパッドのボタンを、XINPUT_GAMEPADビットフラグを16進数で指定 -->
+		<!-- @key : 割り当てたいキーをDIKの16進数で指定-->
+		
+		<!-- サンプル：Aボタン(0x1000)を右Ctrl(0x9D)にバインド-->
+		<!--<bindkey button="1000" key="9D" />-->
+		<!-- サンプル：十字キー左上（0x04|0x01）を左Shift(0x2A)にバインド-->
+		<!--<bindkey button="5" key="2A" />-->
+	</xinput>
+
+	<!-- 翻訳用の辞書ファイル -->
+	<replacetext>
+		
+		<!-- jp : 日本語辞書 / en : 英語辞書 -->
+		<!-- priority : 優先度, 小さい物が優先, デフォルト10 -->
+		<!-- type : 2:タイプ2（ID付き辞書） / 1:タイプ1（ID無し辞書） デフォルト:1 -->
+		<file jp="NVJP/fonv_overrides_ja.txt" en="NVJP/fonv_overrides_en.txt" priority="0" />
+		
+		<file jp="NVJP/fonvj_base_actor_value_ja.txt" en="NVJP/fonvj_base_actor_value_en.txt" type="2" />
+		<file jp="NVJP/fonvj_base_ammo_ja.txt" en="NVJP/fonvj_base_ammo_en.txt" type="2" />
+		<file jp="NVJP/fonvj_base_body_part_ja.txt" en="NVJP/fonvj_base_body_part_en.txt" type="2" />
+		<file jp="NVJP/fonvj_base_description_ja.txt" en="NVJP/fonvj_base_description_en.txt" type="2" />
+		<file jp="NVJP/fonvj_base_dialogue_ja.txt" en="NVJP/fonvj_base_dialogue_en.txt" type="2" />
+		<file jp="NVJP/fonvj_base_game_setting_ja.txt" en="NVJP/fonvj_base_game_setting_en.txt" type="2" />
+		<file jp="NVJP/fonvj_base_message_ja.txt" en="NVJP/fonvj_base_message_en.txt" type="2" />
+		<file jp="NVJP/fonvj_base_name_ja.txt" en="NVJP/fonvj_base_name_en.txt" type="2" />
+		<file jp="NVJP/fonvj_base_note_ja.txt" en="NVJP/fonvj_base_note_en.txt" type="2" />
+		<file jp="NVJP/fonvj_base_quest_objective_ja.txt" en="NVJP/fonvj_base_quest_objective_en.txt" type="2" />
+		<file jp="NVJP/fonvj_base_terminal_ja.txt" en="NVJP/fonvj_base_terminal_en.txt" type="2" />
+		<file jp="NVJP/fonvj_base_topic_ja.txt" en="NVJP/fonvj_base_topic_en.txt" type="2" />
+		
+				<!-- DLC1 Dead Money -->
+		<file jp="NVJP/fonvj_dlc01_ammo_ja.txt" en="NVJP/fonvj_dlc01_ammo_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc01_body_part_ja.txt" en="NVJP/fonvj_dlc01_body_part_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc01_description_ja.txt" en="NVJP/fonvj_dlc01_description_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc01_dialogue_ja.txt" en="NVJP/fonvj_dlc01_dialogue_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc01_message_ja.txt" en="NVJP/fonvj_dlc01_message_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc01_name_ja.txt" en="NVJP/fonvj_dlc01_name_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc01_note_ja.txt" en="NVJP/fonvj_dlc01_note_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc01_quest_objective_ja.txt" en="NVJP/fonvj_dlc01_quest_objective_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc01_terminal_ja.txt" en="NVJP/fonvj_dlc01_terminal_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc01_topic_ja.txt" en="NVJP/fonvj_dlc01_topic_en.txt" type="2" />
+
+		<!-- DLC2 Honest Hearts -->
+		<file jp="NVJP/fonvj_dlc02_ammo_ja.txt" en="NVJP/fonvj_dlc02_ammo_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc02_body_part_ja.txt" en="NVJP/fonvj_dlc02_body_part_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc02_description_ja.txt" en="NVJP/fonvj_dlc02_description_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc02_dialogue_ja.txt" en="NVJP/fonvj_dlc02_dialogue_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc02_message_ja.txt" en="NVJP/fonvj_dlc02_message_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc02_name_ja.txt" en="NVJP/fonvj_dlc02_name_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc02_note_ja.txt" en="NVJP/fonvj_dlc02_note_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc02_quest_objective_ja.txt" en="NVJP/fonvj_dlc02_quest_objective_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc02_terminal_ja.txt" en="NVJP/fonvj_dlc02_terminal_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc02_topic_ja.txt" en="NVJP/fonvj_dlc02_topic_en.txt" type="2" />
+
+		<!-- DLC3 Old World Blues -->
+		<file jp="NVJP/fonvj_dlc03_ammo_ja.txt" en="NVJP/fonvj_dlc03_ammo_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc03_body_part_ja.txt" en="NVJP/fonvj_dlc03_body_part_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc03_description_ja.txt" en="NVJP/fonvj_dlc03_description_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc03_dialogue_ja.txt" en="NVJP/fonvj_dlc03_dialogue_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc03_message_ja.txt" en="NVJP/fonvj_dlc03_message_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc03_name_ja.txt" en="NVJP/fonvj_dlc03_name_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc03_note_ja.txt" en="NVJP/fonvj_dlc03_note_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc03_quest_objective_ja.txt" en="NVJP/fonvj_dlc03_quest_objective_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc03_terminal_ja.txt" en="NVJP/fonvj_dlc03_terminal_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc03_topic_ja.txt" en="NVJP/fonvj_dlc03_topic_en.txt" type="2" />
+
+		<!-- DLC4 Lonesome Road -->
+		<file jp="NVJP/fonvj_dlc04_ammo_ja.txt" en="NVJP/fonvj_dlc04_ammo_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc04_description_ja.txt" en="NVJP/fonvj_dlc04_description_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc04_dialogue_ja.txt" en="NVJP/fonvj_dlc04_dialogue_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc04_message_ja.txt" en="NVJP/fonvj_dlc04_message_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc04_name_ja.txt" en="NVJP/fonvj_dlc04_name_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc04_note_ja.txt" en="NVJP/fonvj_dlc04_note_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc04_quest_objective_ja.txt" en="NVJP/fonvj_dlc04_quest_objective_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc04_terminal_ja.txt" en="NVJP/fonvj_dlc04_terminal_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc04_topic_ja.txt" en="NVJP/fonvj_dlc04_topic_en.txt" type="2" />
+
+		<!-- DLC5 Courier's Stash -->
+		<file jp="NVJP/fonvj_dlc05_message_ja.txt" en="NVJP/fonvj_dlc05_message_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc05_name_ja.txt" en="NVJP/fonvj_dlc05_name_en.txt" type="2" />
+
+		<!-- DLC6 Gun Runners' Arsenal -->
+		<file jp="NVJP/fonvj_dlc06_ammo_ja.txt" en="NVJP/fonvj_dlc06_ammo_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc06_description_ja.txt" en="NVJP/fonvj_dlc06_description_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc06_message_ja.txt" en="NVJP/fonvj_dlc06_message_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc06_name_ja.txt" en="NVJP/fonvj_dlc06_name_en.txt" type="2" />
+
+		<!-- Activation Text Overrides -->
+		<file jp="NVJP/fonvj_base_activation_text_override_ja.txt" en="NVJP/fonvj_base_activation_text_override_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc01_activation_text_override_ja.txt" en="NVJP/fonvj_dlc01_activation_text_override_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc02_activation_text_override_ja.txt" en="NVJP/fonvj_dlc02_activation_text_override_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc03_activation_text_override_ja.txt" en="NVJP/fonvj_dlc03_activation_text_override_en.txt" type="2" />
+		<file jp="NVJP/fonvj_dlc04_activation_text_override_ja.txt" en="NVJP/fonvj_dlc04_activation_text_override_en.txt" type="2" />
+	</replacetext>
+
+	<fonts>
+		<!-- 環境に合わせて、使用する日本語フォント・文字サイズを変更してください -->
+		<!-- id : フォントID -->
+		<!-- fontname : フォント名 -->
+		<!-- size : フォントサイズ -->
+		<!-- intervaltextchars : 文字間隔 -->
+		<!-- intervaltextlines : 行間隔 -->
+		<font id="default" fontname="メイリオ" size="24" weight="700" outlinesize="1" fontcolor="f0f0f0" outlinecolor="282828" intervaltextchars="-2" intervaltextlines="0" />
+		
+		<!-- フォントIDに、fntファイル名を指定することで描画フォントを変更できます。省略されたfntはデフォルトのものが使用されます。 -->
+		<font id="glow_monofonto_medium.fnt" fontname="メイリオ" size="24" weight="700" outlinesize="1" fontcolor="f0f0f0" outlinecolor="282828" intervaltextchars="-2" intervaltextlines="0" />
+	</fonts>
+
+	<analyze>
+		<!-- ignore : 解析対象外フォント -->
+		<ignore file="glow_futura_caps_large.fnt" />
+		<ignore file="fixedsys_comp_uniform_width.fnt" />
+		<ignore file="DarN_Sui_Generis_Otl_10.fnt" />
+	</analyze>
+
+	<!-- 辞書翻訳時に取り除かれるプリフィックス・サフィックス -->
+	<config id="TrimPrefixRegularExpressions">
+		<![CDATA[^([ >]+|<GID[0-9]+>)]]><!-- ターミナルの記号|ID埋め込み -->
+	</config>
+	<config id="TrimSuffixRegularExpressions">
+		<![CDATA[([ ]*)$]]>
+	</config>
+
+	<!-- 辞書翻訳時にバイパスされるプリフィックス・サフィックス -->
+	<config id="BypassPrefixRegularExpressions">
+		<![CDATA[^(\[[a-zA-Z0-9,%\$/ ]+\]|Req: .*Ranks: [0-9]+|<.+>)]]><!-- スピーチチャレンジ、スキル要求|Perks|ID埋め込み -->
+	</config>
+	<config id="BypassSuffixRegularExpressions">
+		<![CDATA[(\([0-9/\(\)A-Z, ]+\)|\+)$]]><!-- アイテム個数/改造 -->
+	</config>
+
+	<!-- 描画テキストのフィルタ（画面描画直前に描画文字列を変換、AllTextReplace=1ならば翻訳されていないテキストにも適用）-->
+	<drawtextfilters>
+		<!-- サンプル <replace source="大丈夫だ、問題無い" destination="一番良いのを頼む" />-->
+	</drawtextfilters>
+
+</fojp>
