@@ -1,27 +1,10 @@
-﻿Imports System
-Imports System.Text
+﻿Imports System.Text
 Imports System.Runtime.InteropServices
 Imports System.IO
 
 Imports System.ComponentModel
 
 Public Class start_loading
-    Public Declare Function GetPrivateProfileString Lib "kernel32" _
-        Alias "GetPrivateProfileStringA" (
-        <MarshalAs(UnmanagedType.LPStr)> ByVal lpApplicationName As String,
-        <MarshalAs(UnmanagedType.LPStr)> ByVal lpKeyName As String,
-        <MarshalAs(UnmanagedType.LPStr)> ByVal lpDefault As String,
-        <MarshalAs(UnmanagedType.LPStr)> ByVal lpReturnedString As StringBuilder,
-        ByVal nSize As UInt32,
-        <MarshalAs(UnmanagedType.LPStr)> ByVal lpFileName As String) As UInt32
-
-    Private Declare Auto Function GetPrivateProfileStringW Lib "kernel32" (ByVal lpAppName As String,
-    ByVal lpKeyName As String,
-    ByVal lpDefault As String,
-    ByVal lpReturnedString As StringBuilder,
-    ByVal nSize As Integer,
-    ByVal lpFileName As String) As Integer
-
     '定義(起動場所)
     Dim Root As String
     'URL/Hash
@@ -38,7 +21,7 @@ Public Class start_loading
     Dim Titles As String = "Fallout: New Vegas Japanese Patch - "
     'Version
     Dim VersionB As String = My.Application.Info.Version.ToString
-    Private Sub close_box_Click(sender As Object, e As EventArgs) Handles close_box.Click
+    Private Sub Close_Box_Click(sender As Object, e As EventArgs) Handles close_box.Click
         Application.Exit()
     End Sub
     Private Sub ErrorBypass()
@@ -61,7 +44,7 @@ Public Class start_loading
         MAIN_FOUM_VIS()
     End Sub
 
-    Private Sub loadin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Loadin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         '初期チェック
         Me.Visible = True
         Me.ShowInTaskbar = True
@@ -210,9 +193,9 @@ Public Class start_loading
         Try
             '読み込み開始(NVSE)
             Dim NVSE As New StringBuilder(500)
-            Dim NVSE_A As Integer = GetPrivateProfileString("DOWNLOAD_URL", "NVSE_URL", "", NVSE, NVSE.Capacity, ini_A)
+            Dim NVSE_A As Integer = NativeMethods.GetPrivateProfileStringW("DOWNLOAD_URL", "NVSE_URL", "", NVSE, NVSE.Capacity, ini_A)
             If NVSE_A > 0 Then
-                cfg.NVSE_URL.Text = NVSE.ToString()
+                Cfg.NVSE_URL.Text = NVSE.ToString()
             Else
                 Dim ex As New Win32Exception(Marshal.GetLastWin32Error())
                 MessageBox.Show(ex.Message, "NVSE Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -221,9 +204,9 @@ Public Class start_loading
 
             '読み込み開始(NVSEベータ版)
             Dim NVSEBETA As New StringBuilder(500)
-            Dim NVSE_BETA_A As Integer = GetPrivateProfileString("DOWNLOAD_URL", "NVSE_BETA_URL", "", NVSEBETA, NVSEBETA.Capacity, ini_A)
+            Dim NVSE_BETA_A As Integer = NativeMethods.GetPrivateProfileStringW("DOWNLOAD_URL", "NVSE_BETA_URL", "", NVSEBETA, NVSEBETA.Capacity, ini_A)
             If NVSE_BETA_A > 0 Then
-                cfg.NVSE_BETA_URL.Text = NVSEBETA.ToString()
+                Cfg.NVSE_BETA_URL.Text = NVSEBETA.ToString()
             Else
                 Dim ex As New Win32Exception(Marshal.GetLastWin32Error())
                 MessageBox.Show(ex.Message, "NVSE BETA Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -232,9 +215,9 @@ Public Class start_loading
 
             '読み込み開始(FOJP)
             Dim FOJP As New StringBuilder(500)
-            Dim FOJP_A As Integer = GetPrivateProfileString("DOWNLOAD_URL", "FOJP2_URL", "", FOJP, FOJP.Capacity, ini_A)
+            Dim FOJP_A As Integer = NativeMethods.GetPrivateProfileStringW("DOWNLOAD_URL", "FOJP2_URL", "", FOJP, FOJP.Capacity, ini_A)
             If FOJP_A > 0 Then
-                cfg.FOJP_URL.Text = FOJP.ToString()
+                Cfg.FOJP_URL.Text = FOJP.ToString()
             Else
                 Dim ex As New Win32Exception(Marshal.GetLastWin32Error())
                 MessageBox.Show(ex.Message, "FOJP Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -243,9 +226,9 @@ Public Class start_loading
 
             '読み込み開始(FOJPN)
             Dim FOPACK As New StringBuilder(500)
-            Dim FOPACK_A As Integer = GetPrivateProfileString("DOWNLOAD_URL", "FO_PACK_URL", "", FOPACK, FOPACK.Capacity, ini_A)
+            Dim FOPACK_A As Integer = NativeMethods.GetPrivateProfileStringW("DOWNLOAD_URL", "FO_PACK_URL", "", FOPACK, FOPACK.Capacity, ini_A)
             If FOPACK_A > 0 Then
-                cfg.FOJPN_URL.Text = FOPACK.ToString()
+                Cfg.FOJPN_URL.Text = FOPACK.ToString()
             Else
                 Dim ex As New Win32Exception(Marshal.GetLastWin32Error())
                 MessageBox.Show(ex.Message, "FO PACK Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -254,9 +237,9 @@ Public Class start_loading
 
             '読み込み開始(DLC_FOJP)
             Dim DLC_FOJP As New StringBuilder(500)
-            Dim DLC_FOJP_A As Integer = GetPrivateProfileString("DOWNLOAD_URL", "FOJP_XML_URL", "", DLC_FOJP, DLC_FOJP.Capacity, ini_A)
+            Dim DLC_FOJP_A As Integer = NativeMethods.GetPrivateProfileStringW("DOWNLOAD_URL", "FOJP_XML_URL", "", DLC_FOJP, DLC_FOJP.Capacity, ini_A)
             If DLC_FOJP_A > 0 Then
-                cfg.DLC_FOJP_URL.Text = DLC_FOJP.ToString()
+                Cfg.DLC_FOJP_URL.Text = DLC_FOJP.ToString()
             Else
                 Dim ex As New Win32Exception(Marshal.GetLastWin32Error())
                 MessageBox.Show(ex.Message, "XML FOJP Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -283,9 +266,9 @@ Public Class start_loading
         Try
             '読み込み開始(NVSE)
             Dim NVSE_MD5 As New StringBuilder(500)
-            Dim NVSE_MD5_A As Integer = GetPrivateProfileString("DOWNLOAD_HAAAASH", "NVSE_MD5", "", NVSE_MD5, NVSE_MD5.Capacity, ini_A)
+            Dim NVSE_MD5_A As Integer = NativeMethods.GetPrivateProfileStringW("DOWNLOAD_HAAAASH", "NVSE_MD5", "", NVSE_MD5, NVSE_MD5.Capacity, ini_A)
             If NVSE_MD5_A > 0 Then
-                cfg.NVSE_MD5.Text = NVSE_MD5.ToString()
+                Cfg.NVSE_MD5.Text = NVSE_MD5.ToString()
             Else
                 Dim ex As New Win32Exception(Marshal.GetLastWin32Error())
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -294,9 +277,9 @@ Public Class start_loading
 
             '読み込み開始(NVSEベータ版)
             Dim NVSEBETA_MD5 As New StringBuilder(500)
-            Dim NVSE_MD5_BETA_A As Integer = GetPrivateProfileString("DOWNLOAD_HAAAASH", "NVSE_BETA_MD5", "", NVSEBETA_MD5, NVSEBETA_MD5.Capacity, ini_A)
+            Dim NVSE_MD5_BETA_A As Integer = NativeMethods.GetPrivateProfileStringW("DOWNLOAD_HAAAASH", "NVSE_BETA_MD5", "", NVSEBETA_MD5, NVSEBETA_MD5.Capacity, ini_A)
             If NVSE_MD5_BETA_A > 0 Then
-                cfg.NVSE_BETA_MD5.Text = NVSEBETA_MD5.ToString()
+                Cfg.NVSE_BETA_MD5.Text = NVSEBETA_MD5.ToString()
             Else
                 Dim ex As New Win32Exception(Marshal.GetLastWin32Error())
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -305,9 +288,9 @@ Public Class start_loading
 
             '読み込み開始(FOJP)
             Dim FOJP_MD5 As New StringBuilder(500)
-            Dim FOJP_MD5_A As Integer = GetPrivateProfileString("DOWNLOAD_HAAAASH", "FOJP2_MD5", "", FOJP_MD5, FOJP_MD5.Capacity, ini_A)
+            Dim FOJP_MD5_A As Integer = NativeMethods.GetPrivateProfileStringW("DOWNLOAD_HAAAASH", "FOJP2_MD5", "", FOJP_MD5, FOJP_MD5.Capacity, ini_A)
             If FOJP_MD5_A > 0 Then
-                cfg.FOJP_MD5.Text = FOJP_MD5.ToString()
+                Cfg.FOJP_MD5.Text = FOJP_MD5.ToString()
             Else
                 Dim ex As New Win32Exception(Marshal.GetLastWin32Error())
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -316,9 +299,9 @@ Public Class start_loading
 
             '読み込み開始(DLC_FOJP)
             Dim DLC_FOJP_MD5 As New StringBuilder(500)
-            Dim DLC_FOJP_MD5_A As Integer = GetPrivateProfileString("DOWNLOAD_HAAAASH", "FOJP_XML_MD5", "", DLC_FOJP_MD5, DLC_FOJP_MD5.Capacity, ini_A)
+            Dim DLC_FOJP_MD5_A As Integer = NativeMethods.GetPrivateProfileStringW("DOWNLOAD_HAAAASH", "FOJP_XML_MD5", "", DLC_FOJP_MD5, DLC_FOJP_MD5.Capacity, ini_A)
             If DLC_FOJP_MD5_A > 0 Then
-                cfg.DLC_MD5.Text = DLC_FOJP_MD5.ToString()
+                Cfg.DLC_MD5.Text = DLC_FOJP_MD5.ToString()
             Else
                 Dim ex As New Win32Exception(Marshal.GetLastWin32Error())
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -348,4 +331,11 @@ Public Class start_loading
         'メインを表示する
         mains.Show()
     End Sub
+End Class
+
+NotInheritable Class NativeMethods
+    <DllImport("kernel32.dll", CharSet:=CharSet.Unicode)>
+    Public Shared Function GetPrivateProfileStringW _
+        (ByVal lpApplicationName As String, ByVal lpKeyName As String, ByVal lpDefault As String, ByVal lpReturnedString As StringBuilder, ByVal nSize As UInt32, ByVal lpFileName As String) As UInt32
+    End Function
 End Class

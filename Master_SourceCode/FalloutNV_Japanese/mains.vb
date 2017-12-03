@@ -39,7 +39,7 @@ Public Class mains
     '作成用
     Private WarningTxT As System.Windows.Forms.Label
 
-    Private Sub mains_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Mains_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'ツールチップを追加
         '表示されるまでの時間
         toolTipMsg.InitialDelay = 0
@@ -75,9 +75,9 @@ Public Class mains
                 End If
             Else
                 'それでも見つからない場合
-                MessageBox.Show("申し訳ありません。このユーザでは権限不足もしくは環境の問題により" & vbCr & _
-                                "取得出来ませんでした。" & vbCr & vbCr & _
-                                "管理者として実行するか、ユーザをご変更してください。", "Error", _
+                MessageBox.Show("申し訳ありません。このユーザでは権限不足もしくは環境の問題により" & vbCr &
+                                "取得出来ませんでした。" & vbCr & vbCr &
+                                "管理者として実行するか、ユーザをご変更してください。", "Error",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         End If
@@ -266,7 +266,7 @@ Public Class mains
         End Try
     End Sub
 
-    Private Sub mains_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+    Private Sub Mains_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         If UIC Then
             Application.Exit()
         Else
@@ -298,7 +298,7 @@ Public Class mains
         End If
     End Sub
 
-    Private Sub downloadClient_DownloadProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs)
+    Private Sub DownloadClient_DownloadProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs)
         'ダウンロード処理表示
         ProgressBar1.Value = e.ProgressPercentage
         ProgressBar1.Refresh()
@@ -322,7 +322,7 @@ Public Class mains
         Application.Exit()
     End Sub
 
-    Private Sub downloadClient_DownloadFileCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
+    Private Sub DownloadClient_DownloadFileCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
         If e.Cancelled Then
             'Event
             EventTxT.Refresh()
@@ -391,11 +391,12 @@ Public Class mains
     Private Sub ViewerButton_MouseDown(sender As Object, e As MouseEventArgs) Handles ViewerButton.MouseDown
         If (Control.MouseButtons And MouseButtons.Left) = MouseButtons.Left Then
             Try
-                Dim directryopens As New FolderBrowserDialog
-                directryopens.Description = "FalloutNV.exeがあるフォルダを指定してください。"
-                directryopens.RootFolder = Environment.SpecialFolder.Desktop
-                directryopens.SelectedPath = Environment.SpecialFolder.Desktop
-                directryopens.ShowNewFolderButton = False
+                Dim directryopens As New FolderBrowserDialog With {
+                    .Description = "FalloutNV.exeがあるフォルダを指定してください。",
+                    .RootFolder = Environment.SpecialFolder.Desktop,
+                    .SelectedPath = Environment.SpecialFolder.Desktop,
+                    .ShowNewFolderButton = False
+                }
                 If directryopens.ShowDialog(Me) = DialogResult.OK Then
                     'パスに使用出来ない文字確認
                     Dim filepath As String = directryopens.SelectedPath
@@ -424,7 +425,7 @@ Public Class mains
                 Dim Desktop_select As String = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop)
                 fileop.FileName = "FalloutNV.exe"
                 fileop.InitialDirectory = Desktop_select
-                fileop.Filter = _
+                fileop.Filter =
                     "実行ファイル(*.exe)|*.exe"
                 fileop.FilterIndex = 1
                 'タイトルを設定する
@@ -453,7 +454,7 @@ Public Class mains
                         Next
                     Else
                         'NO
-                        MessageBox.Show("これはFalloutNV.exeではありません", "Error", _
+                        MessageBox.Show("これはFalloutNV.exeではありません", "Error",
                                         MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
                 End If
@@ -469,10 +470,10 @@ Public Class mains
         EventTxT.Refresh()
         EventTxT.Text = "しばらくお待ち下さい。ダウンロードする準備を開始しました..."
         NVSE_checks.Enabled = False
-        download_ready()
+        Download_Ready()
     End Sub
 
-    Private Sub download_ready()
+    Private Sub Download_Ready()
         Try
             If Directory.Exists(Root & "Data") Then
                 If Directory.Exists(Root & "Download") Then
@@ -484,20 +485,20 @@ Public Class mains
                         '解凍フォルダ
                         If Directory.Exists(Root & "Data") Then
                             'New Vegas Script Extender 
-                            download_1_()
+                            Download_1_()
                             DownloadButtons.Enabled = False
                         Else
                             'フォルダ生成
                             Directory.CreateDirectory(Root & "Data")
                             'New Vegas Script Extender 
-                            download_1_()
+                            Download_1_()
                             DownloadButtons.Enabled = False
                         End If
                     Else
                         '解凍フォルダ
                         If Directory.Exists(Root & "Data") Then
                             'New Vegas Script Extender 
-                            download_1_()
+                            Download_1_()
                             DownloadButtons.Enabled = False
                         Else
                             'フォルダ生成
@@ -505,7 +506,7 @@ Public Class mains
                             'フォルダ生成
                             Directory.CreateDirectory(Root & "Download")
                             'New Vegas Script Extender
-                            download_1_()
+                            Download_1_()
                             DownloadButtons.Enabled = False
                         End If
                     End If
@@ -517,20 +518,20 @@ Public Class mains
                         '解凍フォルダ
                         If Directory.Exists(Root & "Data") Then
                             'New Vegas Script Extender 
-                            download_1_()
+                            Download_1_()
                             DownloadButtons.Enabled = False
                         Else
                             'フォルダ生成
                             Directory.CreateDirectory(Root & "Data")
                             'New Vegas Script Extender 
-                            download_1_()
+                            Download_1_()
                             DownloadButtons.Enabled = False
                         End If
                     Else
                         '解凍フォルダ
                         If Directory.Exists(Root & "Data") Then
                             'New Vegas Script Extender 
-                            download_1_()
+                            Download_1_()
                             DownloadButtons.Enabled = False
                         Else
                             'フォルダ生成
@@ -538,7 +539,7 @@ Public Class mains
                             'フォルダ生成
                             Directory.CreateDirectory(Root & "Download")
                             'New Vegas Script Extender
-                            download_1_()
+                            Download_1_()
                             DownloadButtons.Enabled = False
                         End If
                     End If
@@ -549,20 +550,20 @@ Public Class mains
                     '解凍フォルダ
                     If Directory.Exists(Root & "Data") Then
                         'New Vegas Script Extender 
-                        download_1_()
+                        Download_1_()
                         DownloadButtons.Enabled = False
                     Else
                         'フォルダ生成
                         Directory.CreateDirectory(Root & "Data")
                         'New Vegas Script Extender 
-                        download_1_()
+                        Download_1_()
                         DownloadButtons.Enabled = False
                     End If
                 Else
                     '解凍フォルダ
                     If Directory.Exists(Root & "Data") Then
                         'New Vegas Script Extender 
-                        download_1_()
+                        Download_1_()
                         DownloadButtons.Enabled = False
                     Else
                         'フォルダ生成
@@ -570,14 +571,14 @@ Public Class mains
                         'フォルダ生成
                         Directory.CreateDirectory(Root & "Download")
                         'New Vegas Script Extender
-                        download_1_()
+                        Download_1_()
                         DownloadButtons.Enabled = False
                     End If
                 End If
             End If
         Catch access_error As System.Security.SecurityException
-            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             EventTxT.Refresh()
             EventTxT.Text = access_error.Message
@@ -586,11 +587,11 @@ Public Class mains
         End Try
     End Sub
 
-    Private Sub download_1_()
+    Private Sub Download_1_()
         If NVSE_checks.Checked Then
             Try
                 'ファイル名を取得する
-                Dim URL_FILE_NAME As String = Path.GetFileNameWithoutExtension(cfg.NVSE_BETA_URL.Text)
+                Dim URL_FILE_NAME As String = Path.GetFileNameWithoutExtension(Cfg.NVSE_BETA_URL.Text)
                 'ダウンロードしたファイルの保存先
                 Dim fileName As String = Root & "Download\" & URL_FILE_NAME & ".zip"
                 'ファイルパス保存
@@ -598,16 +599,16 @@ Public Class mains
                 'ファイル名保存
                 Download_FileName_1 = URL_FILE_NAME
                 'ダウンロード基のURL
-                Dim u As New Uri(cfg.NVSE_BETA_URL.Text)
+                Dim u As New Uri(Cfg.NVSE_BETA_URL.Text)
 
                 'WebClientの作成
                 If downloadClient Is Nothing Then
                     downloadClient = New WebClient()
                     'イベントハンドラの作成
-                    AddHandler downloadClient.DownloadProgressChanged, _
-                        AddressOf downloadClient_DownloadProgressChanged
-                    AddHandler downloadClient.DownloadFileCompleted, _
-                        AddressOf downloadClient_DownloadFileCompleted
+                    AddHandler downloadClient.DownloadProgressChanged,
+                        AddressOf DownloadClient_DownloadProgressChanged
+                    AddHandler downloadClient.DownloadFileCompleted,
+                        AddressOf DownloadClient_DownloadFileCompleted
                 End If
                 'DL完了合図
                 DL_1_ = True
@@ -625,10 +626,10 @@ Public Class mains
                 Try
                     'WebRequest Version
                     'ファイル名を取得する
-                    Dim URL_FILE_NAME As String = Path.GetFileNameWithoutExtension(cfg.NVSE_BETA_URL.Text)
+                    Dim URL_FILE_NAME As String = Path.GetFileNameWithoutExtension(Cfg.NVSE_BETA_URL.Text)
 
                     'ダウンロードしたファイルの保存先
-                    Dim url As String = cfg.NVSE_BETA_URL.Text
+                    Dim url As String = Cfg.NVSE_BETA_URL.Text
                     Dim fileName As String = Root & "Download\" & URL_FILE_NAME & ".zip"
 
                     'ファイル名保存
@@ -658,8 +659,8 @@ Public Class mains
                     'FOJPダウンロード
                     Download_2_()
                 Catch access_error As System.Security.SecurityException
-                    MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                                    "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+                    MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                                    "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     DownloadButtons.Text = "Download" & vbCr & "(NVSE/FOJP/翻訳)"
                     DownloadButtons.Enabled = True
@@ -671,7 +672,7 @@ Public Class mains
         Else
             Try
                 'ファイル名を取得する
-                Dim URL_FILE_NAME As String = Path.GetFileNameWithoutExtension(cfg.NVSE_URL.Text)
+                Dim URL_FILE_NAME As String = Path.GetFileNameWithoutExtension(Cfg.NVSE_URL.Text)
                 'ダウンロードしたファイルの保存先
                 Dim fileName As String = Root & "Download\" & URL_FILE_NAME & ".zip"
                 'ファイルパス保存
@@ -679,16 +680,16 @@ Public Class mains
                 'ファイル名保存
                 Download_FileName_1 = URL_FILE_NAME
                 'ダウンロード基のURL
-                Dim u As New Uri(cfg.NVSE_URL.Text)
+                Dim u As New Uri(Cfg.NVSE_URL.Text)
 
                 'WebClientの作成
                 If downloadClient Is Nothing Then
                     downloadClient = New WebClient()
                     'イベントハンドラの作成
-                    AddHandler downloadClient.DownloadProgressChanged, _
-                        AddressOf downloadClient_DownloadProgressChanged
-                    AddHandler downloadClient.DownloadFileCompleted, _
-                        AddressOf downloadClient_DownloadFileCompleted
+                    AddHandler downloadClient.DownloadProgressChanged,
+                        AddressOf DownloadClient_DownloadProgressChanged
+                    AddHandler downloadClient.DownloadFileCompleted,
+                        AddressOf DownloadClient_DownloadFileCompleted
                 End If
                 'DL完了合図
                 DL_1_ = True
@@ -705,10 +706,10 @@ Public Class mains
                 Try
                     'WebRequest Version
                     'ファイル名を取得する
-                    Dim URL_FILE_NAME As String = Path.GetFileNameWithoutExtension(cfg.NVSE_URL.Text)
+                    Dim URL_FILE_NAME As String = Path.GetFileNameWithoutExtension(Cfg.NVSE_URL.Text)
 
                     'ダウンロードしたファイルの保存先
-                    Dim url As String = cfg.NVSE_URL.Text
+                    Dim url As String = Cfg.NVSE_URL.Text
                     Dim fileName As String = Root & "Download\" & URL_FILE_NAME & ".zip"
 
                     'ファイル名保存
@@ -738,8 +739,8 @@ Public Class mains
                     'FOJPダウンロード
                     Download_2_()
                 Catch access_error As System.Security.SecurityException
-                    MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                                    "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+                    MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                                    "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     DownloadButtons.Text = "Download" & vbCr & "(NVSE/FOJP/翻訳)"
                     DownloadButtons.Enabled = True
@@ -754,7 +755,7 @@ Public Class mains
     Private Sub Download_2_()
         Try
             'ファイル名を取得する
-            Dim URL_FILE_NAME As String = Path.GetFileNameWithoutExtension(cfg.FOJP_URL.Text)
+            Dim URL_FILE_NAME As String = Path.GetFileNameWithoutExtension(Cfg.FOJP_URL.Text)
             'ダウンロードしたファイルの保存先
             Dim fileName As String = Root & "Download\" & URL_FILE_NAME & ".zip"
             'ファイル名保存
@@ -762,16 +763,16 @@ Public Class mains
             'ファイル名保存
             Download_FileName_2 = URL_FILE_NAME
             'ダウンロード基のURL
-            Dim u As New Uri(cfg.FOJP_URL.Text)
+            Dim u As New Uri(Cfg.FOJP_URL.Text)
 
             'WebClientの作成
             If downloadClient Is Nothing Then
                 downloadClient = New WebClient()
                 'イベントハンドラの作成
-                AddHandler downloadClient.DownloadProgressChanged, _
-                    AddressOf downloadClient_DownloadProgressChanged
-                AddHandler downloadClient.DownloadFileCompleted, _
-                    AddressOf downloadClient_DownloadFileCompleted
+                AddHandler downloadClient.DownloadProgressChanged,
+                    AddressOf DownloadClient_DownloadProgressChanged
+                AddHandler downloadClient.DownloadFileCompleted,
+                    AddressOf DownloadClient_DownloadFileCompleted
             End If
             'DL完了合図
             DL_2_ = True
@@ -789,10 +790,10 @@ Public Class mains
                 'WebRequest Version
 
                 'ファイル名を取得する
-                Dim URL_FILE_NAME As String = Path.GetFileNameWithoutExtension(cfg.FOJP_URL.Text)
+                Dim URL_FILE_NAME As String = Path.GetFileNameWithoutExtension(Cfg.FOJP_URL.Text)
 
                 'ダウンロードしたファイルの保存先
-                Dim url As String = cfg.FOJP_URL.Text
+                Dim url As String = Cfg.FOJP_URL.Text
                 Dim fileName As String = Root & "Download\" & URL_FILE_NAME & ".zip"
                 'ファイル名保存
                 Download_File_2 = Root & "Download\" & URL_FILE_NAME & ".zip"
@@ -821,8 +822,8 @@ Public Class mains
                 'FOJPダウンロード
                 Download_3_()
             Catch access_error As System.Security.SecurityException
-                MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                                "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+                MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                                "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DownloadButtons.Text = "Download" & vbCr & "(NVSE/FOJP/翻訳)"
                 DownloadButtons.Enabled = True
@@ -838,16 +839,16 @@ Public Class mains
             'ダウンロードしたファイルの保存先
             Dim fileName As String = Root & "Download\fonvj-dictionary-pack.zip"
             'ダウンロード基のURL
-            Dim u As New Uri(cfg.FOJPN_URL.Text)
+            Dim u As New Uri(Cfg.FOJPN_URL.Text)
 
             'WebClientの作成
             If downloadClient Is Nothing Then
                 downloadClient = New WebClient()
                 'イベントハンドラの作成
-                AddHandler downloadClient.DownloadProgressChanged, _
-                    AddressOf downloadClient_DownloadProgressChanged
-                AddHandler downloadClient.DownloadFileCompleted, _
-                    AddressOf downloadClient_DownloadFileCompleted
+                AddHandler downloadClient.DownloadProgressChanged,
+                    AddressOf DownloadClient_DownloadProgressChanged
+                AddHandler downloadClient.DownloadFileCompleted,
+                    AddressOf DownloadClient_DownloadFileCompleted
             End If
             'DL完了合図
             DL_3_ = True
@@ -864,7 +865,7 @@ Public Class mains
             Try
                 'WebRequest Version
                 'ダウンロードしたファイルの保存先
-                Dim url As String = cfg.FOJPN_URL.Text
+                Dim url As String = Cfg.FOJPN_URL.Text
                 Dim fileName As String = Root & "Download\fonvj-dictionary-pack.zip"
 
                 'Event
@@ -891,8 +892,8 @@ Public Class mains
                 'FOJPダウンロード
                 Download_4_()
             Catch access_error As System.Security.SecurityException
-                MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                                "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+                MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                                "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DownloadButtons.Text = "Download" & vbCr & "(NVSE/FOJP/翻訳)"
                 DownloadButtons.Enabled = True
@@ -910,16 +911,16 @@ Public Class mains
             'ファイル名保存
             Download_File_3 = Root & "Download\fojp.xml"
             'ダウンロード基のURL
-            Dim u As New Uri(cfg.DLC_FOJP_URL.Text)
+            Dim u As New Uri(Cfg.DLC_FOJP_URL.Text)
 
             'WebClientの作成
             If downloadClient Is Nothing Then
                 downloadClient = New WebClient()
                 'イベントハンドラの作成
-                AddHandler downloadClient.DownloadProgressChanged, _
-                    AddressOf downloadClient_DownloadProgressChanged
-                AddHandler downloadClient.DownloadFileCompleted, _
-                    AddressOf downloadClient_DownloadFileCompleted
+                AddHandler downloadClient.DownloadProgressChanged,
+                    AddressOf DownloadClient_DownloadProgressChanged
+                AddHandler downloadClient.DownloadFileCompleted,
+                    AddressOf DownloadClient_DownloadFileCompleted
             End If
             'DL完了合図
             DL_4_ = True
@@ -936,7 +937,7 @@ Public Class mains
             Try
                 'WebRequest Version
                 'ダウンロードしたファイルの保存先
-                Dim url As String = cfg.DLC_FOJP_URL.Text
+                Dim url As String = Cfg.DLC_FOJP_URL.Text
                 Dim fileName As String = Root & "Download\fojp.xml"
                 'ファイル名保存
                 Download_File_3 = Root & "Download\fojp.xml"
@@ -971,8 +972,8 @@ Public Class mains
                     Hash_file_1()
                 End If
             Catch access_error As System.Security.SecurityException
-                MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                                "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+                MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                                "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DownloadButtons.Text = "Download" & vbCr & "(NVSE/FOJP/翻訳)"
                 DownloadButtons.Enabled = True
@@ -995,9 +996,10 @@ Public Class mains
             '圧縮するフォルダのパス 
             Dim sourceDirectory As String = Root & "Data\"
             Dim fileFilter As String = ""
-            Dim fastZipEvents As New ICSharpCode.SharpZipLib.Zip.FastZipEvents()
-            fastZipEvents.CompletedFile = New ICSharpCode.SharpZipLib.Core.CompletedFileHandler(AddressOf CompletedFile)
-            fastZipEvents.Progress = New ICSharpCode.SharpZipLib.Core.ProgressHandler(AddressOf Progress)
+            Dim fastZipEvents As New ICSharpCode.SharpZipLib.Zip.FastZipEvents With {
+                .CompletedFile = New ICSharpCode.SharpZipLib.Core.CompletedFileHandler(AddressOf CompletedFile),
+                .Progress = New ICSharpCode.SharpZipLib.Core.ProgressHandler(AddressOf Progress)
+            }
             Dim fastZip As New ICSharpCode.SharpZipLib.Zip.FastZip(fastZipEvents)
             'DL完了合図
             DL_1_ = True
@@ -1007,8 +1009,8 @@ Public Class mains
             '圧縮してZIP書庫を作成 
             fastZip.ExtractZip(zipFileName, sourceDirectory, fileFilter)
         Catch access_error As System.Security.SecurityException
-            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Application.Exit()
         Catch ex As Exception
@@ -1029,9 +1031,10 @@ Public Class mains
             '圧縮するフォルダのパス 
             Dim sourceDirectory As String = Root & "Data\"
             Dim fileFilter As String = ""
-            Dim fastZipEvents As New ICSharpCode.SharpZipLib.Zip.FastZipEvents()
-            fastZipEvents.CompletedFile = New ICSharpCode.SharpZipLib.Core.CompletedFileHandler(AddressOf CompletedFile)
-            fastZipEvents.Progress = New ICSharpCode.SharpZipLib.Core.ProgressHandler(AddressOf Progress)
+            Dim fastZipEvents As New ICSharpCode.SharpZipLib.Zip.FastZipEvents With {
+                .CompletedFile = New ICSharpCode.SharpZipLib.Core.CompletedFileHandler(AddressOf CompletedFile),
+                .Progress = New ICSharpCode.SharpZipLib.Core.ProgressHandler(AddressOf Progress)
+            }
             Dim fastZip As New ICSharpCode.SharpZipLib.Zip.FastZip(fastZipEvents)
             'DL完了合図
             DL_2_ = True
@@ -1041,8 +1044,8 @@ Public Class mains
             '圧縮してZIP書庫を作成 
             fastZip.ExtractZip(zipFileName, sourceDirectory, fileFilter)
         Catch access_error As System.Security.SecurityException
-            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Application.Exit()
         Catch ex As Exception
@@ -1059,9 +1062,10 @@ Public Class mains
             '圧縮するフォルダのパス 
             Dim sourceDirectory As String = Root & "Data\"
             Dim fileFilter As String = ""
-            Dim fastZipEvents As New ICSharpCode.SharpZipLib.Zip.FastZipEvents()
-            fastZipEvents.CompletedFile = New ICSharpCode.SharpZipLib.Core.CompletedFileHandler(AddressOf CompletedFile)
-            fastZipEvents.Progress = New ICSharpCode.SharpZipLib.Core.ProgressHandler(AddressOf Progress)
+            Dim fastZipEvents As New ICSharpCode.SharpZipLib.Zip.FastZipEvents With {
+                .CompletedFile = New ICSharpCode.SharpZipLib.Core.CompletedFileHandler(AddressOf CompletedFile),
+                .Progress = New ICSharpCode.SharpZipLib.Core.ProgressHandler(AddressOf Progress)
+            }
             Dim fastZip As New ICSharpCode.SharpZipLib.Zip.FastZip(fastZipEvents)
             'DL完了合図
             DL_3_ = True
@@ -1071,8 +1075,8 @@ Public Class mains
             '圧縮してZIP書庫を作成 
             fastZip.ExtractZip(zipFileName, sourceDirectory, fileFilter)
         Catch access_error As System.Security.SecurityException
-            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Application.Exit()
         Catch ex As Exception
@@ -1099,17 +1103,17 @@ Public Class mains
                 result.Append(b.ToString("x2"))
             Next
             'チェック
-            If result.ToString() = cfg.NVSE_BETA_MD5.Text Then
+            If result.ToString() = Cfg.NVSE_BETA_MD5.Text Then
                 Hash_file_2()
             Else
                 '再ダウンロードする（二重DL確認）
                 If Hash1_ Then
                     '二度目の失敗はオフライン推奨
-                    MessageBox.Show("Error:" & "再ダウンロードしましたがダウンロードファイルが破損しています。" & vbCr & _
-                                    "お時間を空けてダウンロードするか、オフラインモードに切り換えて下さい" & vbCr & vbCr & _
-                                    "File:" & fileName & vbCr & vbCr & _
-                                    "MD5(設定値):" & cfg.NVSE_BETA_MD5.Text & vbCr & vbCr & _
-                                    "MD5(DL値):" & result.ToString(), _
+                    MessageBox.Show("Error:" & "再ダウンロードしましたがダウンロードファイルが破損しています。" & vbCr &
+                                    "お時間を空けてダウンロードするか、オフラインモードに切り換えて下さい" & vbCr & vbCr &
+                                    "File:" & fileName & vbCr & vbCr &
+                                    "MD5(設定値):" & Cfg.NVSE_BETA_MD5.Text & vbCr & vbCr &
+                                    "MD5(DL値):" & result.ToString(),
                                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     ClearDownload()
                 Else
@@ -1120,11 +1124,11 @@ Public Class mains
                         Directory.Delete(Root & "Data", True)
                         Directory.Delete(Root & "Download", True)
                         'New Vegas Script Extender 
-                        download_ready()
+                        Download_Ready()
                         DownloadButtons.Enabled = False
                     Catch access_error As System.Security.SecurityException
-                        MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                                        "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+                        MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                                        "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Application.Exit()
                     Catch ex As Exception
@@ -1150,17 +1154,17 @@ Public Class mains
                 result.Append(b.ToString("x2"))
             Next
             'チェック
-            If result.ToString() = cfg.NVSE_MD5.Text Then
+            If result.ToString() = Cfg.NVSE_MD5.Text Then
                 Hash_file_2()
             Else
                 '再ダウンロードする（二重DL確認）
                 If Hash1_ Then
                     '二度目の失敗はオフライン推奨
-                    MessageBox.Show("Error:" & "再ダウンロードしましたがダウンロードファイルが破損しています。" & vbCr & _
-                                    "お時間を空けてダウンロードするか、オフラインモードに切り換えて下さい" & vbCr & vbCr & _
-                                    "File:" & fileName & vbCr & vbCr & _
-                                    "MD5(設定値):" & cfg.NVSE_MD5.Text & vbCr & vbCr & _
-                                    "MD5(DL値):" & result.ToString(), _
+                    MessageBox.Show("Error:" & "再ダウンロードしましたがダウンロードファイルが破損しています。" & vbCr &
+                                    "お時間を空けてダウンロードするか、オフラインモードに切り換えて下さい" & vbCr & vbCr &
+                                    "File:" & fileName & vbCr & vbCr &
+                                    "MD5(設定値):" & Cfg.NVSE_MD5.Text & vbCr & vbCr &
+                                    "MD5(DL値):" & result.ToString(),
                                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     ClearDownload()
                 Else
@@ -1171,11 +1175,11 @@ Public Class mains
                         Directory.Delete(Root & "Data", True)
                         Directory.Delete(Root & "Download", True)
                         'New Vegas Script Extender 
-                        download_ready()
+                        Download_Ready()
                         DownloadButtons.Enabled = False
                     Catch access_error As System.Security.SecurityException
-                        MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                                        "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+                        MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                                        "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Application.Exit()
                     Catch ex As Exception
@@ -1194,7 +1198,7 @@ Public Class mains
 
         'ハッシュチェック用
         Dim fileName As String = Download_File_2
-        Dim fs As New FileStream(fileName, _
+        Dim fs As New FileStream(fileName,
             FileMode.Open, FileAccess.Read)
         Dim md5 As New System.Security.Cryptography.MD5CryptoServiceProvider()
         Dim bs As Byte() = md5.ComputeHash(fs)
@@ -1205,17 +1209,17 @@ Public Class mains
             result.Append(b.ToString("x2"))
         Next
         'チェック
-        If result.ToString() = cfg.FOJP_MD5.Text Then
+        If result.ToString() = Cfg.FOJP_MD5.Text Then
             Hash_file_3()
         Else
             '再ダウンロードする（二重DL確認）
             If Hash2_ Then
                 '二度目の失敗はオフライン推奨
-                MessageBox.Show("Error:" & "再ダウンロードしましたがダウンロードファイルが破損しています。" & vbCr & _
-                                "お時間を空けてダウンロードするか、オフラインモードに切り換えて下さい" & vbCr & vbCr & _
-                                "File:" & fileName & vbCr & vbCr & _
-                                "MD5(設定値):" & cfg.FOJP_MD5.Text & vbCr & vbCr & _
-                                "MD5(DL値):" & result.ToString(), _
+                MessageBox.Show("Error:" & "再ダウンロードしましたがダウンロードファイルが破損しています。" & vbCr &
+                                "お時間を空けてダウンロードするか、オフラインモードに切り換えて下さい" & vbCr & vbCr &
+                                "File:" & fileName & vbCr & vbCr &
+                                "MD5(設定値):" & Cfg.FOJP_MD5.Text & vbCr & vbCr &
+                                "MD5(DL値):" & result.ToString(),
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 ClearDownload()
             Else
@@ -1223,11 +1227,11 @@ Public Class mains
                 Hash2_ = True
                 Try
                     'Fallout 日本語化必須ファイル
-                    download_ready()
+                    Download_Ready()
                     DownloadButtons.Enabled = False
                 Catch access_error As System.Security.SecurityException
-                    MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                                    "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+                    MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                                    "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Application.Exit()
                 Catch ex As Exception
@@ -1255,18 +1259,18 @@ Public Class mains
             result.Append(b.ToString("x2"))
         Next
         'チェック
-        If result.ToString() = cfg.DLC_MD5.Text Then
+        If result.ToString() = Cfg.DLC_MD5.Text Then
             '解凍処理
             Unzip_1_()
         Else
             '再ダウンロードする（二重DL確認）
             If Hash3_ Then
                 '二度目の失敗はオフライン推奨
-                MessageBox.Show("Error:" & "再ダウンロードしましたがダウンロードファイルが破損しています。" & vbCr & _
-                                "お時間を空けてダウンロードするか、オフラインモードに切り換えて下さい" & vbCr & vbCr & _
-                                "File:" & fileName & vbCr & vbCr & _
-                                "MD5(設定値):" & cfg.DLC_MD5.Text & vbCr & vbCr & _
-                                "MD5(DL値):" & result.ToString(), _
+                MessageBox.Show("Error:" & "再ダウンロードしましたがダウンロードファイルが破損しています。" & vbCr &
+                                "お時間を空けてダウンロードするか、オフラインモードに切り換えて下さい" & vbCr & vbCr &
+                                "File:" & fileName & vbCr & vbCr &
+                                "MD5(設定値):" & Cfg.DLC_MD5.Text & vbCr & vbCr &
+                                "MD5(DL値):" & result.ToString(),
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 ClearDownload()
             Else
@@ -1274,11 +1278,11 @@ Public Class mains
                 Hash3_ = True
                 Try
                     'Fallout 日本語化必須ファイル
-                    download_ready()
+                    Download_Ready()
                     DownloadButtons.Enabled = False
                 Catch access_error As System.Security.SecurityException
-                    MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                                    "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+                    MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                                    "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Application.Exit()
                 Catch ex As Exception
@@ -1298,15 +1302,15 @@ Public Class mains
             If UIC Then
                 'パス確認
                 If Path_pass.Text = "" Then
-                    MessageBox.Show("...\SteamApps\common\Fallout New Vegas" & vbCr & vbCr & _
-                                    "上記までのフルパスを指定してください。", "Null Error", _
+                    MessageBox.Show("...\SteamApps\common\Fallout New Vegas" & vbCr & vbCr &
+                                    "上記までのフルパスを指定してください。", "Null Error",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
                     If Directory.Exists(Root & "Download") Then
                         'パス確認
                         If Path_pass.Text = "" Then
-                            MessageBox.Show("...\SteamApps\common\Fallout New Vegas" & vbCr & vbCr & _
-                                            "上記までのフルパスを指定してください。", "Null Error", _
+                            MessageBox.Show("...\SteamApps\common\Fallout New Vegas" & vbCr & vbCr &
+                                            "上記までのフルパスを指定してください。", "Null Error",
                                             MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Else
                             '適用開始
@@ -1316,12 +1320,12 @@ Public Class mains
                                     EventTxT.Refresh()
                                     EventTxT.Text = """fojp.xml""のコピーを開始します.."
                                     'fojp.xml
-                                    File.Copy(Root & "Download\fojp.xml", _
+                                    File.Copy(Root & "Download\fojp.xml",
                                                         FONVPath & "\fojp.xml", True)
                                     Directory1()
                                 Else
-                                    MessageBox.Show(Root & "\Data\fojp.xml" & vbCr & vbCr & _
-                                                    "ファイルが見つかりません。再度ダウンロードして下さい", "Error", _
+                                    MessageBox.Show(Root & "\Data\fojp.xml" & vbCr & vbCr &
+                                                    "ファイルが見つかりません。再度ダウンロードして下さい", "Error",
                                                     MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 End If
                             Else
@@ -1331,33 +1335,33 @@ Public Class mains
                                     EventTxT.Refresh()
                                     EventTxT.Text = """fojp.xml""のコピーを開始します.."
                                     'fojp.xml
-                                    File.Copy(Root & "\Data\" & unPack_FileName_2 & "\fojp.xml", _
+                                    File.Copy(Root & "\Data\" & unPack_FileName_2 & "\fojp.xml",
                                                         FONVPath & "\fojp.xml", True)
                                     Directory1()
                                 Else
-                                    MessageBox.Show(Root & "\Data\" & unPack_FileName_2 & "\fojp.xml" & vbCr & vbCr & _
-                                                    "ファイルが見つかりません。再度ダウンロードして下さい", "Error", _
+                                    MessageBox.Show(Root & "\Data\" & unPack_FileName_2 & "\fojp.xml" & vbCr & vbCr &
+                                                    "ファイルが見つかりません。再度ダウンロードして下さい", "Error",
                                                     MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 End If
                             End If
                         End If
                     Else
-                        MessageBox.Show(Root & "Download" & vbCr & vbCr & _
-                                        "オフライン用ファイルがありません。確認してください", "No Download File", _
+                        MessageBox.Show(Root & "Download" & vbCr & vbCr &
+                                        "オフライン用ファイルがありません。確認してください", "No Download File",
                                         MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
                 End If
             Else
                 'パス確認
                 If Path_pass.Text = "" Then
-                    MessageBox.Show("...\SteamApps\common\Fallout New Vegas" & vbCr & vbCr & _
-                                    "上記までのフルパスを指定してください。", "Null Error", _
+                    MessageBox.Show("...\SteamApps\common\Fallout New Vegas" & vbCr & vbCr &
+                                    "上記までのフルパスを指定してください。", "Null Error",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
                     'パス確認
                     If Path_pass.Text = "" Then
-                        MessageBox.Show("...\SteamApps\common\Fallout New Vegas" & vbCr & vbCr & _
-                                        "上記までのフルパスを指定してください。", "Null Error", _
+                        MessageBox.Show("...\SteamApps\common\Fallout New Vegas" & vbCr & vbCr &
+                                        "上記までのフルパスを指定してください。", "Null Error",
                                         MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Else
                         '適用開始
@@ -1367,12 +1371,12 @@ Public Class mains
                                 EventTxT.Refresh()
                                 EventTxT.Text = """fojp.xml""のコピーを開始します.."
                                 'fojp.xml
-                                File.Copy(Root & "Download\fojp.xml", _
+                                File.Copy(Root & "Download\fojp.xml",
                                                     FONVPath & "\fojp.xml", True)
                                 Directory1()
                             Else
-                                MessageBox.Show(Root & "\Data\fojp.xml" & vbCr & vbCr & _
-                                                "ファイルが見つかりません。再度ダウンロードして下さい", "Error", _
+                                MessageBox.Show(Root & "\Data\fojp.xml" & vbCr & vbCr &
+                                                "ファイルが見つかりません。再度ダウンロードして下さい", "Error",
                                                 MessageBoxButtons.OK, MessageBoxIcon.Error)
                             End If
                         Else
@@ -1382,12 +1386,12 @@ Public Class mains
                                 EventTxT.Refresh()
                                 EventTxT.Text = """fojp.xml""のコピーを開始します.."
                                 'fojp.xml
-                                File.Copy(Root & "\Data\" & unPack_FileName_2 & "\fojp.xml", _
+                                File.Copy(Root & "\Data\" & unPack_FileName_2 & "\fojp.xml",
                                                     FONVPath & "\fojp.xml", True)
                                 Directory1()
                             Else
-                                MessageBox.Show(Root & "\Data\" & unPack_FileName_2 & "\fojp.xml" & vbCr & vbCr & _
-                                                "ファイルが見つかりません。再度ダウンロードして下さい", "Error", _
+                                MessageBox.Show(Root & "\Data\" & unPack_FileName_2 & "\fojp.xml" & vbCr & vbCr &
+                                                "ファイルが見つかりません。再度ダウンロードして下さい", "Error",
                                                 MessageBoxButtons.OK, MessageBoxIcon.Error)
                             End If
                         End If
@@ -1396,8 +1400,8 @@ Public Class mains
             End If
 
         Catch access_error As System.Security.SecurityException
-            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Application.Exit()
         Catch ex As Exception
@@ -1418,24 +1422,24 @@ Public Class mains
                 If Directory.Exists(FONVPath & "\Data\NVSE\plugins") Then
                     '_fojp.dll
                     If File.Exists(Root & "\Data\" & unPack_FileName_2 & "\_fojp.dll") Then
-                        File.Copy(Root & "\Data\" & unPack_FileName_2 & "\_fojp.dll", _
+                        File.Copy(Root & "\Data\" & unPack_FileName_2 & "\_fojp.dll",
                                             FONVPath & "\Data\NVSE\plugins\_fojp.dll", True)
                         Directory2()
                     Else
-                        MessageBox.Show(Root & "\Data\" & unPack_FileName_2 & "\fojp.xml" & vbCr & vbCr & _
-                                        "ファイルが見つかりません。再度ダウンロードして下さい", "Error", _
+                        MessageBox.Show(Root & "\Data\" & unPack_FileName_2 & "\fojp.xml" & vbCr & vbCr &
+                                        "ファイルが見つかりません。再度ダウンロードして下さい", "Error",
                                         MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
                 Else
                     'フォルダ生成(プラグイン)
                     Directory.CreateDirectory(FONVPath & "\Data\NVSE\plugins")
                     If File.Exists(Root & "\Data\" & unPack_FileName_2 & "\_fojp.dll") Then
-                        File.Copy(Root & "\Data\" & unPack_FileName_2 & "\_fojp.dll", _
+                        File.Copy(Root & "\Data\" & unPack_FileName_2 & "\_fojp.dll",
                                             FONVPath & "\Data\NVSE\plugins\_fojp.dll", True)
                         Directory2()
                     Else
-                        MessageBox.Show(Root & "\Data\" & unPack_FileName_2 & "\fojp.xml" & vbCr & vbCr & _
-                                        "ファイルが見つかりません。再度ダウンロードして下さい", "Error", _
+                        MessageBox.Show(Root & "\Data\" & unPack_FileName_2 & "\fojp.xml" & vbCr & vbCr &
+                                        "ファイルが見つかりません。再度ダウンロードして下さい", "Error",
                                         MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
                 End If
@@ -1445,8 +1449,8 @@ Public Class mains
             End Try
 
         Catch access_error As System.Security.SecurityException
-            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1465,18 +1469,18 @@ Public Class mains
                 '残骸判定
                 If Directory.Exists(Root & "\Data\" & unPack_FileName_2 & "\【NV】VANILLAのフォント") Then
                     '処理簡易化の為のコピー後削除
-                    My.Computer.FileSystem.CopyDirectory(Root & "\Data\" & unPack_FileName_2 & "\【NV】VANILLAのフォント", _
-                                                         Root & "\Data\" & unPack_FileName_2 & "\font", _
+                    My.Computer.FileSystem.CopyDirectory(Root & "\Data\" & unPack_FileName_2 & "\【NV】VANILLAのフォント",
+                                                         Root & "\Data\" & unPack_FileName_2 & "\font",
                                                          FileIO.UIOption.AllDialogs, FileIO.UICancelOption.DoNothing)
                     ' フォルダを削除する
                     Directory.Delete(Root & "\Data\" & unPack_FileName_2 & "\【NV】VANILLAのフォント", True)
                     '更に処理簡易化のため丸ごとコピー
-                    CopyDirectory(Root & "\Data\" & unPack_FileName_2 & "\font", _
+                    CopyDirectory(Root & "\Data\" & unPack_FileName_2 & "\font",
                                   FONVPath & "\Data\Textures\fonts", True)
                     Directory3()
                 Else
                     '更に処理簡易化のため丸ごとコピー
-                    CopyDirectory(Root & "\Data\" & unPack_FileName_2 & "\font", _
+                    CopyDirectory(Root & "\Data\" & unPack_FileName_2 & "\font",
                                   FONVPath & "\Data\Textures\fonts", True)
                     Directory3()
                 End If
@@ -1486,25 +1490,25 @@ Public Class mains
                 '残骸判定
                 If Directory.Exists(Root & "\Data\" & unPack_FileName_2 & "\【NV】VANILLAのフォント") Then
                     '処理簡易化の為のコピー後削除
-                    My.Computer.FileSystem.CopyDirectory(Root & "\Data\" & unPack_FileName_2 & "\【NV】VANILLAのフォント", _
-                                                         Root & "\Data\" & unPack_FileName_2 & "\font", _
+                    My.Computer.FileSystem.CopyDirectory(Root & "\Data\" & unPack_FileName_2 & "\【NV】VANILLAのフォント",
+                                                         Root & "\Data\" & unPack_FileName_2 & "\font",
                                                          FileIO.UIOption.AllDialogs, FileIO.UICancelOption.DoNothing)
                     ' フォルダを削除する
                     Directory.Delete(Root & "\Data\" & unPack_FileName_2 & "\【NV】VANILLAのフォント", True)
                     '更に処理簡易化のため丸ごとコピー
-                    CopyDirectory(Root & "\Data\" & unPack_FileName_2 & "\font", _
+                    CopyDirectory(Root & "\Data\" & unPack_FileName_2 & "\font",
                                   FONVPath & "\Data\Textures\fonts", True)
                     Directory3()
                 Else
                     '更に処理簡易化のため丸ごとコピー
-                    CopyDirectory(Root & "\Data\" & unPack_FileName_2 & "\font", _
+                    CopyDirectory(Root & "\Data\" & unPack_FileName_2 & "\font",
                                   FONVPath & "\Data\Textures\fonts", True)
                     Directory3()
                 End If
             End If
         Catch access_error As System.Security.SecurityException
-            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1524,12 +1528,12 @@ Public Class mains
                     If Directory.Exists(FONVPath & "\Data\Menus") Then
                         'computers_menu.xml
                         If File.Exists(Root & "\Data\" & unPack_FileName_2 & "\computers_menu.xml") Then
-                            File.Copy(Root & "\Data\" & unPack_FileName_2 & "\computers_menu.xml", _
+                            File.Copy(Root & "\Data\" & unPack_FileName_2 & "\computers_menu.xml",
                                                 FONVPath & "\Data\Menus\computers_menu.xml", True)
                             Directory4()
                         Else
-                            MessageBox.Show(Root & "\Data\" & unPack_FileName_2 & "\computers_menu.xml" & vbCr & vbCr & _
-                                            "ファイルが見つかりません。再度ダウンロードして下さい", "Error", _
+                            MessageBox.Show(Root & "\Data\" & unPack_FileName_2 & "\computers_menu.xml" & vbCr & vbCr &
+                                            "ファイルが見つかりません。再度ダウンロードして下さい", "Error",
                                             MessageBoxButtons.OK, MessageBoxIcon.Error)
                         End If
                     Else
@@ -1537,12 +1541,12 @@ Public Class mains
                         Directory.CreateDirectory(FONVPath & "\Data\Menus")
                         'computers_menu.xml
                         If File.Exists(Root & "\Data\" & unPack_FileName_2 & "\computers_menu.xml") Then
-                            File.Copy(Root & "\Data\" & unPack_FileName_2 & "\computers_menu.xml", _
+                            File.Copy(Root & "\Data\" & unPack_FileName_2 & "\computers_menu.xml",
                                                 FONVPath & "\Data\Menus\computers_menu.xml", True)
                             Directory4()
                         Else
-                            MessageBox.Show(Root & "\Data\" & unPack_FileName_2 & "\computers_menu.xml" & vbCr & vbCr & _
-                                            "ファイルが見つかりません。再度ダウンロードして下さい", "Error", _
+                            MessageBox.Show(Root & "\Data\" & unPack_FileName_2 & "\computers_menu.xml" & vbCr & vbCr &
+                                            "ファイルが見つかりません。再度ダウンロードして下さい", "Error",
                                             MessageBoxButtons.OK, MessageBoxIcon.Error)
                         End If
                     End If
@@ -1554,8 +1558,8 @@ Public Class mains
                 Directory4()
             End If
         Catch access_error As System.Security.SecurityException
-            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1621,7 +1625,7 @@ Public Class mains
                         'Event
                         EventTxT.Refresh()
                         EventTxT.Text = """Fallout: New Vegas""の日本語化の適用が完了しました。再度ダウンロードする場合は電球をクリックして下さい。"
-                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了", _
+                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了",
                                         MessageBoxButtons.OK, MessageBoxIcon.Information)
                         'アンインスコも有効
                         UnistallButtons.Refresh()
@@ -1635,7 +1639,7 @@ Public Class mains
                         'Event
                         EventTxT.Refresh()
                         EventTxT.Text = """Fallout: New Vegas""の日本語化の適用が完了しました"
-                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了", _
+                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了",
                                         MessageBoxButtons.OK, MessageBoxIcon.Information)
                         'アンインスコも有効
                         UnistallButtons.Refresh()
@@ -1652,7 +1656,7 @@ Public Class mains
                         'Event
                         EventTxT.Refresh()
                         EventTxT.Text = """Fallout: New Vegas""の日本語化の適用が完了しました"
-                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了", _
+                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了",
                                         MessageBoxButtons.OK, MessageBoxIcon.Information)
                         'アンインスコも有効
                         UnistallButtons.Refresh()
@@ -1666,7 +1670,7 @@ Public Class mains
                         'Event
                         EventTxT.Refresh()
                         EventTxT.Text = """Fallout: New Vegas""の日本語化の適用が完了しました"
-                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了", _
+                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了",
                                         MessageBoxButtons.OK, MessageBoxIcon.Information)
                         'アンインスコも有効
                         UnistallButtons.Refresh()
@@ -1687,7 +1691,7 @@ Public Class mains
                         'Event
                         EventTxT.Refresh()
                         EventTxT.Text = """Fallout: New Vegas""の日本語化の適用が完了しました"
-                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了", _
+                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了",
                                         MessageBoxButtons.OK, MessageBoxIcon.Information)
                         'アンインスコも有効
                         UnistallButtons.Refresh()
@@ -1701,7 +1705,7 @@ Public Class mains
                         'Event
                         EventTxT.Refresh()
                         EventTxT.Text = """Fallout: New Vegas""の日本語化の適用が完了しました"
-                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了", _
+                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了",
                                         MessageBoxButtons.OK, MessageBoxIcon.Information)
                         'アンインスコも有効
                         UnistallButtons.Refresh()
@@ -1721,7 +1725,7 @@ Public Class mains
                         'Event
                         EventTxT.Refresh()
                         EventTxT.Text = """Fallout: New Vegas""の日本語化の適用が完了しました"
-                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了", _
+                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了",
                                         MessageBoxButtons.OK, MessageBoxIcon.Information)
                         'アンインスコも有効
                         UnistallButtons.Refresh()
@@ -1735,7 +1739,7 @@ Public Class mains
                         'Event
                         EventTxT.Refresh()
                         EventTxT.Text = """Fallout: New Vegas""の日本語化の適用が完了しました"
-                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了", _
+                        MessageBox.Show("""Fallout: New Vegas""の日本語化の適用が完了しました", "日本語化適用完了",
                                         MessageBoxButtons.OK, MessageBoxIcon.Information)
                         'アンインスコも有効
                         UnistallButtons.Refresh()
@@ -1803,9 +1807,9 @@ Public Class mains
                     WarningHide.Enabled = True
                     WarningTxT.Visible = True
                     WarningTxT.BringToFront()
-                    WarningTxT.Text = _
-                        "既に日本語化はアンインストールされていますが、" & _
-                        """New Vegas Script Extender""が検出されました。NVSE単体をアンインストールしますか？" & vbCr & _
+                    WarningTxT.Text =
+                        "既に日本語化はアンインストールされていますが、" &
+                        """New Vegas Script Extender""が検出されました。NVSE単体をアンインストールしますか？" & vbCr &
                         "他MODに影響する場合がありますが、それでも良いならボタンを押して下さい。(10秒後に非表示・有効化)"
                 Else
                     UnistallButtons.Refresh()
@@ -1935,8 +1939,8 @@ Public Class mains
                 UnInstall_3.Enabled = True
             End If
         Catch access_error As System.Security.SecurityException
-            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             UnInstall_3.Enabled = True
         Catch ex As Exception
@@ -1967,8 +1971,8 @@ Public Class mains
 
             UnInstall_End.Enabled = True
         Catch access_error As System.Security.SecurityException
-            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -2000,8 +2004,8 @@ Public Class mains
                 UnistallButtons.Text = "アンインストールした" & vbCr & "(完了)"
             End If
         Catch access_error As System.Security.SecurityException
-            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -2031,8 +2035,8 @@ Public Class mains
             UnistallButtons.Refresh()
             UnistallButtons.Text = "アンインストールした" & vbCr & "(完了)"
         Catch access_error As System.Security.SecurityException
-            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr & _
-                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい", _
+            MessageBox.Show("Error:" & access_error.Message & vbCr & vbCr &
+                            "アクセス権限が足りませんでした。管理者へお問い合わせ下さい",
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -2041,10 +2045,10 @@ Public Class mains
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles optionButtons.Click
         '表示する
-        cfg.Visible = True
+        Cfg.Visible = True
     End Sub
 
-    Private Sub offline_mode_1_Click(sender As Object, e As EventArgs) Handles offline_mode_1.Click
+    Private Sub Offline_Mode_1_Click(sender As Object, e As EventArgs) Handles offline_mode_1.Click
         If offline_mode_1.Text = "オフラインモード" Then
             'オフラインモード仕様にする
             If Directory.Exists(Root & "Download") Then
@@ -2069,7 +2073,7 @@ Public Class mains
                 Me.JPButtons.SetBounds(18, 198, 254, 42, BoundsSpecified.All)
                 JPButtons.Refresh()
             Else
-                MessageBox.Show("オフラインモードに切り替える為のデータ・ダウンロードフォルダがありません", _
+                MessageBox.Show("オフラインモードに切り替える為のデータ・ダウンロードフォルダがありません",
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         Else
